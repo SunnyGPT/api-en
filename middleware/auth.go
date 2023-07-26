@@ -94,7 +94,7 @@ func TokenAuth() func(c *gin.Context) {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"error": gin.H{
 					"message": err.Error(),
-					"type":    "one_api_error",
+					"type":    "openai_365_error",
 				},
 			})
 			c.Abort()
@@ -104,7 +104,7 @@ func TokenAuth() func(c *gin.Context) {
 			c.JSON(http.StatusForbidden, gin.H{
 				"error": gin.H{
 					"message": "用户已被封禁",
-					"type":    "one_api_error",
+					"type":    "openai_365_error",
 				},
 			})
 			c.Abort()
@@ -126,7 +126,7 @@ func TokenAuth() func(c *gin.Context) {
 				c.JSON(http.StatusForbidden, gin.H{
 					"error": gin.H{
 						"message": "普通用户不支持指定渠道",
-						"type":    "one_api_error",
+						"type":    "openai_365_error",
 					},
 				})
 				c.Abort()
