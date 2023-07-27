@@ -17,7 +17,7 @@ export function isRoot() {
 
 export function getSystemName() {
   let system_name = localStorage.getItem('system_name');
-  if (!system_name) return 'OpenAI-356';
+  if (!system_name) return 'OpenAI-365';
   return system_name;
 }
 
