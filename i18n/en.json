@@ -455,6 +455,8 @@
   "模型倍率 %.2f，分组倍率 %.2f": "model rate %.2f, group rate %.2f",
   "使用明细（总消耗额度：{renderQuota(stat.quota)}）": "Usage Details (Total Consumption Quota: {renderQuota(stat.quota)})",
   "使用明细（总Used Quota：": "Usage Details (Total Consumption Quota:",
+  "当前Group": "Current Group",
+  "下对于Model": "For Model",
   "one_api_error": "openai_365_error",
   "Delete个人账户": "Delete Account",
   "失败重试次数": "Failed Retries",
