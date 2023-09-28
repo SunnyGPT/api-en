@@ -202,19 +202,21 @@ func Relay(c *gin.Context) {
 		if retryTimesStr == "" {
 			retryTimes = common.RetryTimes
 		}
+		message := err.OpenAIError.Message
 		if retryTimes > 0 {
 			c.Redirect(http.StatusTemporaryRedirect, fmt.Sprintf("%s?retry=%d", c.Request.URL.Path, retryTimes-1))
 		} else {
+			errorMessage4User := "relay error"
 			if err.StatusCode == http.StatusTooManyRequests {
-				err.OpenAIError.Message = "当前分组上游负载已饱和，请稍后再试"
+				errorMessage4User = "当前分组上游负载已饱和，请稍后再试"
 			}
-			err.OpenAIError.Message = common.MessageWithRequestId(err.OpenAIError.Message, requestId)
+			err.OpenAIError.Message = common.MessageWithRequestId(errorMessage4User, requestId)
 			c.JSON(err.StatusCode, gin.H{
 				"error": err.OpenAIError,
 			})
 		}
 		channelId := c.GetInt("channel_id")
-		common.LogError(c.Request.Context(), fmt.Sprintf("relay error (channel #%d): %s", channelId, err.Message))
+		common.LogError(c.Request.Context(), fmt.Sprintf("relay error (channel #%d): %s", channelId, message))
 		// https://platform.openai.com/docs/guides/error-codes/api-errors
 		if shouldDisableChannel(&err.OpenAIError, err.StatusCode) {
 			channelId := c.GetInt("channel_id")
