@@ -223,6 +223,7 @@ func Relay(c *gin.Context) {
  		// https://platform.openai.com/docs/guides/error-codes/api-errors
  		if shouldDisableChannel(&err.OpenAIError, err.StatusCode) {
  			channelId := c.GetInt("channel_id")
+			channelName := c.GetString("channel_name")
 			disableChannel(channelId, channelName, err.Message)
 		}
 	}
